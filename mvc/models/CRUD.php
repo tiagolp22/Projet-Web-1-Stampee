@@ -4,7 +4,7 @@ namespace App\Models;
 abstract class CRUD extends \PDO {
 
     final public function __construct(){
-        parent::__construct('mysql:host=localhost;dbname=ecommerce;port=3306;charset=utf8', 'root', '');
+        parent::__construct('mysql:host=localhost;dbname=stampee;port=3306;charset=utf8', 'root', '');
     }
 
     final public function select($field = null, $order = 'asc'){
@@ -12,6 +12,29 @@ abstract class CRUD extends \PDO {
             $field = $this->primaryKey;
         }
         $sql = "SELECT * FROM $this->table ORDER BY $field $order";
+        if($stmt = $this->query($sql)){
+            return $stmt->fetchAll();
+        }else{
+            return false;
+        }
+    }
+
+    public function select_image($id)
+    {
+        $sql = "SELECT * FROM stampee_image WHERE id_timbre = $id";
+    
+        if ($stmt = $this->query($sql)) {
+            $queryResults = $stmt->fetchAll();
+            return $queryResults[0]['image_principale'];
+        } else {
+            return false;
+        }
+    }
+    
+
+    final public function select_user_id($id){
+       
+        $sql = "SELECT * FROM $this->table WHERE id_user = $id";
         if($stmt = $this->query($sql)){
             return $stmt->fetchAll();
         }else{
@@ -38,6 +61,8 @@ abstract class CRUD extends \PDO {
         $fieldName = implode(', ', array_keys($data));
         $fieldValue = ':'.implode(', :', array_keys($data));
         $sql = "INSERT INTO $this->table ($fieldName) VALUES ($fieldValue);";
+
+        error_log($sql);
         $stmt = $this->prepare($sql);
         foreach($data as $key=>$value){
             $stmt->bindValue(":$key", $value);
