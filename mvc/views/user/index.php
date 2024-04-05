@@ -1,30 +1,20 @@
 {{ include('layouts/header.php', { title: 'Users'})}}
+<main class="main-login">
+    <div class="form-form-login">
+        <h1>Users</h1>
 
-<h1>Users</h1>
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Username</th>
-            <th>Email</th>
-            <th>Privilege</th>
-            <th>Since</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for user in user%}
+        {% for user in users %}
 
-        <tr>
-            <td><a href="{{BASE}}user/show?id={{user.id}}">{{ user.name }}</a></td>
-            <td>{{ user['username'] }}</td>
-            <td>{{ user['email'] }}</td>
-            <td>{{ user['privilege_id'] }}</td>
-            <td>{{ user['created_at'] }}</td>
-        </tr>
+        <p><a href="{{BASE}}user/show?id={{user.id}}">{{ user.user_name }}</a></p>
+        <p>{{ user['email'] }}</p>
 
         {% endfor %}
 
-    </tbody>
-</table>
-<a href="{{BASE}}user/create" class="btn">User Create</a>
+        <form action="{{ base }}/user/delete" method="post">
+            <input type="hidden" name="id" value="{{ user.id }}">
+            <button class="btn block red">Delete</button>
+            <a href="{{BASE}}user/create" class="btn">User Create</a>
+        </form>
+    </div>
 
+    {{ include('layouts/footer.php')}}

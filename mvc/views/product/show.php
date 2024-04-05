@@ -10,19 +10,6 @@
                 </div>
                 <i class="fa-solid fa-chevron-right"></i>
             </div>
-
-            <div>
-                <div class="icon-produit">
-                    <div class="jaime">
-                        J'aime
-                        <i class="fa-regular fa-heart"></i>
-                    </div>
-                    <div class="partager">
-                        Partager
-                        <i class="fa-regular fa-share-from-square"></i>
-                    </div>
-                </div>
-            </div>
         </div>
         <div class="detail-produit">
             <div class="section-detail">
@@ -34,27 +21,31 @@
                 <p><strong>Categorie:</strong> {{ product.categorie }}</p>
                 <p><strong>Condition:</strong> {{ product.condition_etat }}</p>
                 <p><strong>Certifie:</strong> {{ product.certifie }}</p>
-                <div class="produit-quantite">
-                    <!-- <label for="quantity">Quantite</label> -->
-                    <!-- <input type="number" id="quantity" name="quantity" min="1" value="1" /> -->
-                    <div class="prix">Prix {{ mise.prix_offert }}</div>
-                </div>
-                <a href="{{ base }}/product/edit?id={{ product.id }}" class="btn block">Edit</a>
-                <form action="{{ base }}/product/delete" method="post">
+
+                <div class="form-enchere-show">
+
+                <a href="{{ base }}/product/edit?id={{ product.id }}" class="btn block">Modifier</a>
+                <form id="deleteForm" action="{{ base }}/product/delete" method="post">
                     <input type="hidden" name="id" value="{{ product.id }}">
-                    <button class="btn block red">Delete</button>
+                    <button id="deleteButton" class="btn block red">Supprimer</button>
                 </form>
+
+                <script>
+                    document.getElementById('deleteButton').addEventListener('click', function(event) {
+                        event.preventDefault();
+
+                        var confirmDelete = confirm("Êtes-vous sûr de vouloir supprimer cet enregistrement?");
+
+                        if (confirmDelete) {
+                            document.getElementById('deleteForm').submit();
+                        }
+                    });
+                </script>
+                <a href="{{base}}/enchere/create" class="btn block">ENCHERE</a>
+                </div>
 
                 <!-- <div class="btn btn-produit">Ajouter au Panier</div> -->
             </div>
-        </div>
-
-        <div class="produits-similaires">
-            <h3 class="h3-produits-simulaires">Produits Similaires</h3>
-            <hr />
-            {% for similar_product in similar_products %}
-            <img src="../assets/img/photos/{{ similar_product.img }}" alt="timbre {{ similar_product.timbre_nom }}" />
-            {% endfor %}
         </div>
     </div>
 </main>

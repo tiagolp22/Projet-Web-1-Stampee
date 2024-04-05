@@ -5,7 +5,7 @@
     <div class="form-form-login">
 
         <form class="form-login" method="post" enctype="multipart/form-data">
-        <input type="hidden" name="id_user" value="{{session.user_id}}">
+            <input type="hidden" name="id_user" value="{{session.user_id}}">
             <label>Nom :
                 <input type="text" name="timbre_nom" value="{{ stampee_timbre.timbre_nom }}">
             </label>
@@ -76,12 +76,12 @@
             <span class="error">{{ errors.image_principale }}</span>
             {% endif %}
 
-            <label>Images:
+            <!-- <label>Images:
                 <input type="file" name="images[]" multiple>
             </label>
             {% if errors.images is defined %}
             <span class="error">{{ errors.images }}</span>
-            {% endif %}
+            {% endif %} -->
 
             <input type="submit" class="btn" value="Enregistrer">
         </form>

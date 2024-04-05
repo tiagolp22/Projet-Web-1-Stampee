@@ -1,7 +1,7 @@
 {{ include('layouts/header.php', {title: 'Products'}) }}
 <main class="main-login">
-<h1>Products</h1>
-<table class="table-produit">
+    <h1>Products</h1>
+    <table class="table-produit">
         <tr>
             <th>Name</th>
             <th>Date Creation</th>
@@ -13,7 +13,7 @@
             <th>Condition</th>
             <th>Certifie</th>
         </tr>
-    {% for product in products %}
+        {% for product in products %}
         <tr>
             <td><a href="{{ base }}/product/show?id={{ product.id }}">{{ product.timbre_nom }}</a></td>
             <td>{{ product.date_creation }}</td>
@@ -25,9 +25,9 @@
             <td>{{ product.condition_etat }}</td>
             <td>{{ product.certifie }}</td>
         </tr>
-    {% endfor %}
-    
-</table>
-<a href="{{ base }}/product/create" class="btn">Product Create</a>
+        {% endfor %}
 
-{{ include('layouts/footer.php') }}
+    </table>
+    <a href="{{ base }}/product/create" class="btn">Product Create</a>
+
+    {{ include('layouts/footer.php') }}

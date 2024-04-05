@@ -1,12 +1,13 @@
 {{ include('layouts/header.php', {title: 'Product Create'})}}
 <main class="main-login">
     <div class="form-form-login">
-        <form class="form-login" method="post">
+    <form class="form-login" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="id_user" value="{{session.user_id}}">
             <label>Nom :
-                <input type="text" name="name" value="{{ stampee_timbre.timbre_nom }}">
+                <input type="text" name="timbre_nom" value="{{ stampee_timbre.timbre_nom }}">
             </label>
-            {% if errors.name is defined %}
-            <span class="error">{{ errors.name }}</span>
+            {% if errors.timbre_nom is defined %}
+            <span class="error">{{ errors.timbre_nom }}</span>
             {% endif %}
 
             <label>Date de Creation :
@@ -52,10 +53,10 @@
             {% endif %}
 
             <label>Condition :
-                <input type="text" name="condition" value="{{ stampee_timbre.condition }}">
+                <input type="text" name="condition_etat" value="{{ stampee_timbre.condition_etat }}">
             </label>
-            {% if errors.condition is defined %}
-            <span class="error">{{ errors.condition }}</span>
+            {% if errors.condition_etat is defined %}
+            <span class="error">{{ errors.condition_etat }}</span>
             {% endif %}
 
             <label>Certifie :
@@ -65,12 +66,21 @@
             <span class="error">{{ errors.certifie }}</span>
             {% endif %}
 
+            <label>Image Principale:
+                <input type="file" name="image_principale">
+            </label>
             {% if errors.image_principale is defined %}
-            <label>Imagem Principal:</label>
-            <img src="{{ base }}/upload/{{ stampee_timbre.image_principale }}" alt="Imagem Principal" />
+            <span class="error">{{ errors.image_principale }}</span>
             {% endif %}
 
-            <input type="submit" class="btn" value="Enregistrer">
+            <label>Images:
+                <input type="file" name="images[]" multiple>
+            </label>
+            {% if errors.images is defined %}
+            <span class="error">{{ errors.images }}</span>
+            {% endif %}
+
+            <input type="submit" class="btn" value="Update">
         </form>
     </div>
 </main>

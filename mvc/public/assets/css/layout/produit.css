@@ -253,6 +253,29 @@
 
 }
 
+.jaime{
+    && button {
+        border: none; 
+        background: none; 
+        padding: 0; 
+        cursor: pointer;
+    }
+}
+
+.form-enchere-show{
+    display: inline-block;
+    text-align: center;
+
+    && a, button{
+        margin-top: 16px;
+    }
+}
+
+.form-enchere-show{
+    display: flex;
+    flex-direction: row;
+}
+
 @media only screen and (max-width: 1100px) {
 
     .page-produit {

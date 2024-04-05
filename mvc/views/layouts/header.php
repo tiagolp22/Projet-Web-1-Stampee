@@ -34,9 +34,10 @@
           <i class="fa-solid fa-house icon_img1" role="img" aria-label="icon page d'accueil"></i></a>
         {% if not guest %}
         <a href="{{base}}/logout">
-          <i class="fa-solid fa-user icon_img1" role="img" aria-label="icon inscription ou connexion"></i>
+          <i class="fa-solid fa-user-lock" role="img" aria-label="icon inscription ou connexion"></i>
         </a>
-        <p>Oi, {{session.email}}</p>
+        <a href="{{base}}/product/index">Mes produits</a>
+        <p>{{session.user_name}}</p>
         {% else %}
         <a href="{{base}}/login">
           <i class="fa-solid fa-user icon_img1" role="img" aria-label="icon inscription ou connexion"></i>
@@ -45,13 +46,22 @@
         <i class="fa-solid fa-cart-shopping icon_img1" role="img" aria-label="icon inscription ou connexion"></i>
       </div>
     </div>
-
     <div class="header-nav">
       <ul>
+        {% if guest %}
         <li><a href="{{base}}">Home</a></li>
-        <li><a href="{{base}}/catalogue">Catalogue</a></li>
-        <li><a href="{{base}}/apropos">À propos</a></li>
-        <li><a href="{{base}}/contact">Contact</a></li>
+        <li><a href="{{base}}/enchere/index">Catalogue</a></li>
+        <li><a href="{{base}}/apropos/index">À propos</a></li>
+        <li><a href="{{base}}/contact/index">Contact</a></li>
+        <li><a href="{{base}}/user/create">S'abonner</a></li>
+        {% else %}
+        <li><a href="{{base}}">Home</a></li>
+        <li><a href="{{base}}/enchere/index">Catalogue</a></li>
+        <li><a href="{{base}}/apropos/index">À propos</a></li>
+        <li><a href="{{base}}/contact/index">Contact</a></li>
+        <li><a href="{{base}}/product/create">Ajouter un Timbre</a></li>
+        <li><a href="{{base}}/enchere/create">Ajouter une Encherés</a></li>
+        {% endif %}
       </ul>
     </div>
   </header>
